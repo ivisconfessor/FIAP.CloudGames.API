@@ -49,6 +49,9 @@ builder.Services.AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
 // Integrar todas as dependências
 builder.Services.IntegrateDependencyResolver(builder.Configuration);
 
+// Configurar Application Insights
+builder.Services.AddApplicationInsightsTelemetry();
+
 var app = builder.Build();
 
 // Seed de usuário admin para desenvolvimento
