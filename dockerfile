@@ -5,10 +5,14 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copiar tudo e deixar o dotnet encontrar o projeto
+# Copiar tudo
 COPY . .
-RUN dotnet restore ./FIAP.CloudGames.API/src/
-RUN dotnet publish ./FIAP.CloudGames.API/src/ -c Release -o /app/publish
+
+# Restaurar usando o arquivo .sln
+RUN dotnet restore FIAP.CloudGames.API.sln
+
+# Publicar o projeto específico
+RUN dotnet publish src/ -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
