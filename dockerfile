@@ -4,10 +4,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY *.csproj ./
-RUN dotnet restore
+COPY FIAP.CloudGames.API/src/*.csproj ./FIAP.CloudGames.API/src/
+RUN dotnet restore ./FIAP.CloudGames.API/src/
 COPY . .
-RUN dotnet publish -c Release -o /app/publish
+RUN dotnet publish ./FIAP.CloudGames.API/src/ -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
